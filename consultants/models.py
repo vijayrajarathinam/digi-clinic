@@ -22,7 +22,7 @@ class Speciality(models.Model):
 
     class Meta:
         db_table = "specialties"
-        verbose_plural_name = "Specialties"
+        verbose_name_plural = "Specialties"
         ordering = ["name"]
 
 
