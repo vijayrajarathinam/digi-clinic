@@ -53,7 +53,7 @@ ROOT_URLCONF = "telehealth.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": [BASE_DIR / "templates"],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -105,6 +105,11 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 STATIC_URL = "static/"
+STATIC_ROOT = BASE_DIR / "staticfiles"
+STATICFILES_DIRS = [ BASE_DIR / "static" ] if (BASE_DIR / "static").exists() else [] # fmt: skip
+
+MEDIA_URL = "/media/"
+MEDIA_ROOT = BASE_DIR / "media"
 
 # Default primary key field type
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
@@ -144,3 +149,16 @@ CORS_ALLOWED_ORIGINS = [
     "http://127.0.0.1:8000",
 ]
 CORS_ALLOW_CREDENTIALS = True
+
+# email config
+EMAIL_BACKEND = "django.core.backends.smtp.EmailBackend"
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = config("EMAIL_HOST_USER", "<your-email-id>")
+EMAIL_HOST_PASSWORD = config("EMAIL_HOST_PASSWORD", "<your-email-password>")
+DEFAULT_FROM = config("DEFAULT_FROM", "<noreply@domain.com>")
+
+# app config
+APP_NAME = "Godson Herbal Clinic"
+FRONTEND_URL = config("FRONTEND_URL", "http://localhost:3000")
